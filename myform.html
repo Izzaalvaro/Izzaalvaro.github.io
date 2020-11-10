@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <title>Izza Alvaro</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .label {float: left; width: 120px; }
+.infobox {width: 120px; }
+.error { color: rgb(47, 0, 255); padding-left: 10px; }
+.submit { margin-left: 125px; margin-top: 10px;}
+div{padding: 5px; }
+.chkb { margin-left: 125px; margin-top: 10px;}
+.radiobtn { margin-left: 125px; margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+        <h1>Makanan & Minuman Favorit</h1>
+        
+      </div>
+      <br>
+        <div class="text-align text-secondary">
+            <h1 class="text-secondary"></h1>
+            <h1>Pilih Makan & Minuman Favorit</h1>
+        </div>
+      <br>
+    <form>
+        <div>
+            <span class="label">Username </span>
+            <input type="text" class="username" name="username" />
+            <span class="error">Username harus diisi dan hanya boleh terdiri atas huruf, angka dan underscore</span>
+        </div>
+        <div>
+            <span class="label">Password </span>
+            <input type="password" class="password" name="password" />
+            <span class="error"> Password harus diisi</span>
+        </div>
+        <div>
+            <span class="label">Email </span>
+            <input type="text" class="emailadd" name="emailid" />
+            <span class="error"> Alamat e-mail tidak valid</span>
+        </div>
+        <div>
+            <span class="label">Makanan </span> <br>
+            <input type="checkbox" id="Ayam" name="Ayam" value=25 class="chkb">Ayam Goreng<br>
+            <input type="checkbox" id="Bebek" name="Bebek" value=75 class="chkb">Bebek Goreng<br>
+            <input type="checkbox" id="Ikan" name="Ikan" value=100 class="chkb">Ikan Goreng<br>
+            <span class="serviceerror">Pilihlah Makanan Favorit !!!</span>
+        </div>
+        <div>
+            <span class="label">Minuman </span> <br>
+            <input type="checkbox" name="paymode" class="radiobtn" value="Es Teh">Es Teh Manis <br>
+            <input type="checkbox" name="paymode" class="radiobtn" value="Es Cendol">Es Cendol<br>
+            <input type="checkbox" name="paymode" class="radiobtn" value="ES Dawet">Es Dawet<br>
+            <span class="serviceerror">Pilihlah Minuman Favorit !!!</span>
+        </div>
+      
+        <script>
+            $(document).ready(function() {
+$('.error').hide();
+$('.fooderror').addClass('error');
+$('.fooderror').hide();
+$('.payerror').addClass('error');
+$('.payerror').hide();
+$('.submit').click(function(event){
+var data=$('.userid').val();
+if(validate_userid(data))
+{
+$('.userid').next().hide();
+}
+else
+{
+$('.userid').next().show();
+}
+data=$('.password').val();
+var len=data.length;
+if(len<1)
+{
+$('.password').next().show();
+}
+else
+{
+$('.password').next().hide();
+}
+data=$('.emailadd').val();
+if(valid_email(data))
+{
+$('.emailadd').next().hide();
+}
+else
+{
+$('.emailadd').next().show();
+}
+var count=0;
+$('div').find(':checkbox').each(function(){
+if($(this).is(':checked'))
+{
+count++;
+}
+});
+if(count==0)
+{
+$('.fooderror').css({'margin-left':250}).show();
+}
+else
+{
+$('.fooderror').hide();
+}
+count=0;
+$('div').find(':radio').each(function(){
+if($(this).is(':checked'))
+{
+count++;
+}
+});
+if(count==0)
+{
+$('.payerror').css({'margin-left':250}).show();
+}
+else
+{
+$('.payerror').hide();
+}
+count=$('select option:selected').val();
+if(count==0)
+{
+$('.infobox').next().show();
+}
+else
+{
+$('.infobox').next().hide();
+}
+event.preventDefault();
+});
+});
+function valid_email(email)
+{
+var pattern= new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+return pattern.test(email);
+}
+function validate_userid(uid)
+{
+var pattern= new RegExp(/^[a-z0-9_]+$/);
+return pattern.test(uid);
+}
+        </script>
+        <input class="submit btn btn-danger" type="submit" value="Submit">
+    </form>
+      </div>
+</body>
+
+</html>
